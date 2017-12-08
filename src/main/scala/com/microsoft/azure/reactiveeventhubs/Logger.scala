@@ -3,10 +3,12 @@
 package com.microsoft.azure.reactiveeventhubs
 
 import akka.actor.ActorSystem
-import akka.event.{LogSource, Logging}
+import akka.event.{LogSource, Logging, LoggingAdapter}
+import com.typesafe.config.{Config, ConfigFactory}
 
 private[reactiveeventhubs] object Logger {
-  val actorSystem = ActorSystem("EventHubReact")
+  val shConfig = ConfigFactory.empty()
+  val actorSystem = ActorSystem("EventHubReact", shConfig)
 }
 
 /** Common logger via Akka
@@ -23,3 +25,4 @@ private[reactiveeventhubs] trait Logger {
 
   val log = Logging(Logger.actorSystem, this)
 }
+

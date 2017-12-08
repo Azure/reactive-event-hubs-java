@@ -4,6 +4,7 @@ package com.microsoft.azure.reactiveeventhubs.checkpointing
 
 import akka.actor.{ActorRef, ActorSystem, Props}
 import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
+import com.typesafe.config.{Config, ConfigFactory}
 
 import scala.language.{implicitConversions, postfixOps}
 
@@ -11,8 +12,10 @@ import scala.language.{implicitConversions, postfixOps}
   */
 private[reactiveeventhubs] case class CheckpointActorSystem(cpconfig: ICPConfiguration) {
 
-  implicit private[this] val actorSystem  = ActorSystem("EventHubReact")
+  val shConfig = ConfigFactory.empty()
+  implicit private[this] val actorSystem  = ActorSystem("EventHubReact", shConfig)
   implicit private[this] val materializer = ActorMaterializer(ActorMaterializerSettings(actorSystem))
+
   var localRegistry: Map[String, ActorRef] = Map[String, ActorRef]()
 
   /** Create an actor to read/write offset checkpoints from the storage
