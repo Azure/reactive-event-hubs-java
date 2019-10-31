@@ -45,7 +45,7 @@ class EventHubsMessage(
   // Internal properties set by Event hub stoage
   private[this] lazy val systemProps = data.get.getSystemProperties
 
-  lazy val property: String => AnyRef = (propName: => String) => systemProps.get(propName)
+  lazy val property: String => AnyRef = (propName: String) => systemProps.get(propName)
 
   // Meta properties set by the device
   lazy val properties: util.Map[String, String] = data.get.getProperties.asScala.map(x ⇒ (x._1, x._2.toString)).asJava
