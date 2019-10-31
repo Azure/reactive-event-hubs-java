@@ -34,6 +34,7 @@ class APIIsBackwardCompatible
       lazy val sequenceNumber: Long = message1.sequenceNumber
       lazy val content: Array[Byte] = message1.content
       lazy val contentAsString: String = message1.contentAsString
+      lazy val extraProp: AnyRef = message1.property("test-prop")
 
       // Named parameters
       val message2: EventHubsMessage = new EventHubsMessage(data = data, partNumber = partition, partInfo = partitionInfo)
