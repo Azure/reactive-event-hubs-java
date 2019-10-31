@@ -5,8 +5,8 @@ organization := "com.microsoft.azure"
 
 version := "0.5.0"
 
-scalaVersion := "2.12.1"
-crossScalaVersions := Seq("2.11.8", "2.12.1")
+scalaVersion := "2.12.10"
+crossScalaVersions := Seq("2.11.8", "2.12.10")
 
 libraryDependencies ++= {
   Seq(
@@ -20,7 +20,7 @@ libraryDependencies ++= {
     "com.datastax.cassandra" % "cassandra-driver-core" % "3.1.4",
 
     // https://github.com/akka/akka/releases
-    "com.typesafe.akka" %% "akka-stream" % "2.4.17",
+    "com.typesafe.akka" %% "akka-stream" % "2.5.26",
 
     // https://github.com/json4s/json4s/releases
     "org.json4s" %% "json4s-native" % "3.5.1",

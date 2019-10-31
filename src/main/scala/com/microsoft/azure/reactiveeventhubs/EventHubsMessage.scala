@@ -43,10 +43,12 @@ class EventHubsMessage(
   // TODO: test properties over all protocols
 
   // Internal properties set by Event hub stoage
-  private[this] lazy val systemProps = data.get.getSystemProperties()
+  private[this] lazy val systemProps = data.get.getSystemProperties
+
+  lazy val property: String => AnyRef = (propName: => String) => systemProps.get(propName)
 
   // Meta properties set by the device
-  lazy val properties: util.Map[String, String] = data.get.getProperties().asScala.map(x ⇒ (x._1, x._2.toString)).asJava
+  lazy val properties: util.Map[String, String] = data.get.getProperties.asScala.map(x ⇒ (x._1, x._2.toString)).asJava
 
   // Time when the message was received by Event hub service. *NOT* the device time.
   lazy val received: Instant = systemProps.getEnqueuedTime
@@ -76,4 +78,5 @@ class EventHubsMessage(
         Some(partInfo.get.getLastEnqueuedOffset),
         Some(partInfo.get.getLastEnqueuedTime)))
     }
+
 }
